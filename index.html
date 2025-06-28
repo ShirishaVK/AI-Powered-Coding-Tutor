@@ -1,0 +1,1957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeMentor AI Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --primary-hover: #2563eb;
+            --bg-dark: #111827;
+            --bg-darker: #1f2937;
+            --bg-gray-700: #374151;
+            --bg-gray-600: #4b5563;
+            --bg-gray-800: #1e293b;
+            --bg-gray-900: #0f172a;
+            --text-gray-300: #d1d5db;
+            --text-gray-400: #9ca3af;
+            --text-white: #ffffff;
+            --green-600: #16a34a;
+            --yellow-600: #ca8a04;
+            --red-600: #dc2626;
+            --blue-400: #60a5fa;
+            --blue-300: #93c5fd;
+            --border-gray: #374151;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            min-height: 100vh;
+            background: linear-gradient(to bottom, var(--bg-dark), var(--bg-darker));
+            color: var(--text-white);
+        }
+        
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            background-color: var(--bg-gray-900);
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        nav a {
+            color: var(--text-white);
+            text-decoration: none;
+            transition: color 0.2s;
+            font-weight: 500;
+        }
+        
+        nav a:hover {
+            color: var(--blue-400);
+        }
+        
+        /* Buttons */
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--text-white);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--text-gray-300);
+            color: var(--text-white);
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Container */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+        
+        /* Page Styles */
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        /* Home Page */
+        .home-hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+            padding: 3rem 0;
+        }
+        
+        @media (min-width: 768px) {
+            .home-hero {
+                flex-direction: row;
+            }
+        }
+        
+        .home-hero-text {
+            flex: 1;
+        }
+        
+        .home-hero-text h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+        
+        .home-hero-text .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-gray-300);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .home-hero-code {
+            flex: 1;
+            background-color: var(--bg-gray-700);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .home-hero-code pre {
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1.5;
+        }
+        
+        .text-green {
+            color: #4ade80;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-top: 6rem;
+        }
+        
+        @media (min-width: 768px) {
+            .features-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .feature-card {
+            background-color: var(--bg-gray-800);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            transition: transform 0.2s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+        
+        .feature-card p {
+            color: var(--text-gray-300);
+            line-height: 1.6;
+        }
+        
+        /* Exercises Page */
+        .exercises-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        @media (min-width: 768px) {
+            .exercises-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .exercises-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .exercise-card {
+            background-color: var(--bg-gray-800);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .exercise-card:hover {
+            background-color: var(--bg-gray-700);
+        }
+        
+        .exercise-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .exercise-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        
+        .exercise-difficulty {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .easy {
+            background-color: var(--green-600);
+        }
+        
+        .medium {
+            background-color: var(--yellow-600);
+        }
+        
+        .hard {
+            background-color: var(--red-600);
+        }
+        
+        .exercise-topic {
+            color: var(--blue-400);
+            font-size: 0.875rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .exercise-description {
+            color: var(--text-gray-300);
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+        
+        .btn-back {
+            background: none;
+            border: none;
+            color: var(--blue-400);
+            font-size: 1rem;
+            cursor: pointer;
+            margin-bottom: 1.5rem;
+            padding: 0.5rem 0;
+        }
+        
+        .btn-back:hover {
+            color: var(--blue-300);
+        }
+        
+        .exercise-detail-card {
+            background-color: var(--bg-gray-800);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .exercise-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        #solutionInput {
+            width: 100%;
+            height: 300px;
+            background-color: var(--bg-gray-900);
+            color: var(--text-white);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-gray);
+            margin: 1.5rem 0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            resize: none;
+        }
+        
+        #solutionInput:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .feedback-container {
+            background-color: var(--bg-gray-800);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+        }
+        
+        .feedback-container h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feedback-container pre {
+            white-space: pre-wrap;
+            font-family: 'Courier New', Courier, monospace;
+            color: var(--text-gray-300);
+            line-height: 1.5;
+        }
+        
+        /* Resources Page */
+        .resources-controls {
+            margin: 2rem 0;
+        }
+        
+        #searchInput {
+            width: 100%;
+            background-color: var(--bg-gray-700);
+            color: var(--text-white);
+            border: none;
+            border-radius: 0.375rem;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        #searchInput:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--primary-color);
+        }
+        
+        .category-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .category-btn {
+            padding: 0.5rem 1rem;
+            background-color: var(--bg-gray-700);
+            color: var(--text-white);
+            border: none;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+        
+        .category-btn.active {
+            background-color: var(--primary-color);
+        }
+        
+        .category-btn:hover:not(.active) {
+            background-color: var(--bg-gray-600);
+        }
+        
+        .resources-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .resources-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .resources-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .resource-card {
+            background-color: var(--bg-gray-800);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            transition: all 0.2s;
+        }
+        
+        .resource-card:hover {
+            background-color: var(--bg-gray-700);
+            transform: translateY(-2px);
+        }
+        
+        .resource-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .resource-card p {
+            color: var(--text-gray-300);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        
+        .resource-link {
+            color: var(--blue-400);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+        }
+        
+        .resource-link:hover {
+            color: var(--blue-300);
+        }
+        
+        .no-resources {
+            text-align: center;
+            color: var(--text-gray-400);
+            margin: 3rem 0;
+            display: none;
+        }
+
+        /* New Chat Page Styles */
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .code-editor-container, .ai-response-container {
+            background-color: var(--bg-gray-800);
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .editor-header, .response-header {
+            padding: 0.75rem 1rem;
+            background-color: var(--bg-gray-900);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .language-selector select {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            border: none;
+            background-color: var(--bg-gray-700);
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .editor-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .editor-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .editor-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .code-input {
+            flex-grow: 1;
+            padding: 1rem;
+            border: none;
+            resize: none;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            background-color: var(--bg-gray-700);
+            color: var(--text-gray-300);
+            min-height: 300px;
+        }
+
+        .code-input:focus {
+            outline: none;
+        }
+
+        .editor-footer {
+            padding: 0.75rem 1rem;
+            background-color: var(--bg-gray-900);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .primary-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .primary-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .secondary-btn {
+            background-color: var(--bg-gray-800);
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .secondary-btn:hover {
+            background-color: var(--bg-gray-700);
+        }
+
+        .secondary-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .difficulty-selector {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .difficulty-selector select {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid var(--border-gray);
+            background-color: var(--bg-gray-700);
+            color: white;
+        }
+
+        .response-content {
+            flex-grow: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            min-height: 300px;
+            background-color: var(--bg-gray-800);
+        }
+
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--text-gray-400);
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--blue-400);
+        }
+
+        .feedback-options {
+            padding: 0.75rem 1rem;
+            background-color: var(--bg-gray-900);
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .ai-response {
+            white-space: pre-wrap;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+
+        .code-suggestion {
+            background-color: var(--bg-gray-700);
+            border-left: 3px solid var(--primary-color);
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            border-radius: 0 4px 4px 0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+        }
+        
+        .code-block {
+            background-color: var(--bg-gray-700);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .code-language {
+            display: block;
+            color: var(--text-gray-400);
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        code {
+            background-color: var(--bg-gray-700);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+        }
+
+        .ai-response.error {
+            color: var(--red-600);
+            padding: 1rem;
+            background-color: rgba(220, 38, 38, 0.1);
+            border-radius: 0.5rem;
+            border-left: 3px solid var(--red-600);
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .loading-content {
+            background-color: var(--bg-gray-800);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            max-width: 300px;
+        }
+
+        .loading-spinner {
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid var(--primary-color);
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Upload and Share Section */
+        .file-actions {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+            padding: 0 2rem;
+            max-width: 1600px;
+            margin: 0 auto 2rem;
+        }
+
+        .file-input-container {
+            position: relative;
+            flex-grow: 1;
+        }
+
+        .file-input-label {
+            display: block;
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.2s;
+        }
+
+        .file-input-label:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .file-input-label i {
+            margin-right: 0.5rem;
+        }
+
+        #file-upload, #image-upload {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        .share-container {
+            display: flex;
+            gap: 0.5rem;
+            flex-grow: 1;
+        }
+
+        #share-link {
+            flex-grow: 1;
+            padding: 0.5rem 1rem;
+            background-color: var(--bg-gray-700);
+            border: 1px solid var(--border-gray);
+            border-radius: 0.375rem;
+            color: var(--text-white);
+        }
+
+        #copy-link {
+            padding: 0.5rem 1rem;
+            background-color: var(--bg-gray-700);
+            color: var(--text-white);
+            border: 1px solid var(--border-gray);
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        #copy-link:hover {
+            background-color: var(--bg-gray-600);
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--green-600);
+            color: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Voice Controls */
+        .voice-controls {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            margin-top: 0.5rem;
+        }
+
+        .voice-btn {
+            padding: 0.5rem;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            background-color: var(--primary-color);
+            color: white;
+            transition: all 0.2s;
+        }
+
+        .voice-btn.active {
+            background-color: var(--red-600);
+        }
+
+        .voice-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Speaker Button */
+        .speaker-btn {
+            background: none;
+            border: none;
+            color: var(--text-gray-300);
+            cursor: pointer;
+            margin-left: 0.5rem;
+        }
+
+        /* WhatsApp Sharing */
+        .share-chat-btn {
+            background-color: #25D366;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .share-chat-btn:hover {
+            opacity: 0.9;
+        }
+
+        #voice-status {
+            font-size: 0.875rem;
+            color: var(--text-gray-300);
+        }
+
+        /* Image Preview */
+        .preview-image {
+            max-width: 100%;
+            max-height: 200px;
+            margin-top: 1rem;
+            border-radius: 0.5rem;
+            display: none;
+        }
+
+        .ocr-processing {
+            color: var(--blue-400);
+            font-style: italic;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        @media (max-width: 1024px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .file-actions {
+                flex-direction: column;
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo"> AI-POWERED CODING TUTOR</div>
+        <div class="nav-links">
+            <a href="#" class="nav-link" data-page="home">Home</a>
+            <a href="#" class="nav-link" data-page="chat">AI Tutor</a>
+            <a href="#" class="nav-link" data-page="exercises">Exercises</a>
+            <a href="#" class="nav-link" data-page="resources">Resources</a>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home-page" class="page active">
+        <main class="container">
+            <div class="home-hero">
+                <div class="home-hero-text">
+                    <h1>Learn to Code with AI</h1>
+                    <p class="subtitle">Get personalized coding tutorials, instant feedback, and interactive exercises powered by advanced AI.</p>
+                    <a href="#" class="btn btn-primary start-learning-btn">Start Learning</a>
+                </div>
+                <div class="home-hero-code">
+                    <pre><code class="text-green">// Example coding session
+AI: Let's learn about functions!
+You: Can you explain how they work?
+AI: Sure! A function is like a 
+   reusable block of code...</code></pre>
+                </div>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Interactive Learning</h3>
+                    <p>Get real-time feedback and guidance as you code.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Custom Exercises</h3>
+                    <p>Practice with exercises tailored to your skill level.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>24/7 Support</h3>
+                    <p>Get help anytime with our AI coding tutor.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Voice Control</h3>
+                    <p>Speak your code or commands hands-free.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Image to Code</h3>
+                    <p>Extract code from images and screenshots.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Share Easily</h3>
+                    <p>Share your code and feedback with others.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Chat Page -->
+    <div id="chat-page" class="page">
+        <div class="file-actions">
+            <div class="file-input-container">
+                <label for="file-upload" class="file-input-label">
+                    <i class="fas fa-file-upload"></i> Upload Code File
+                </label>
+                <input type="file" id="file-upload" accept=".js,.py,.java,.cpp,.c,.html,.css,.php,.rb,.go,.ts,.jsx,.tsx" />
+            </div>
+            
+            <div class="file-input-container">
+                <!--<label for="image-upload" class="file-input-label">
+                    <i class="fas fa-image"></i> Upload Image
+                </label>-->
+                <input type="file" id="image-upload" accept="image/*" />
+            </div>
+        
+        </div>
+
+        <div class="main-container">
+            <div class="code-editor-container">
+                <div class="editor-header">
+                    <span class="language-selector">
+                        <select id="language-select">
+                            <option value="python">Python</option>
+                            <option value="javascript">JavaScript</option>
+                            <option value="java">Java</option>
+                            <option value="c++">C++</option>
+                            <option value="c">C</option>
+                            <option value="html">HTML</option>
+                            <option value="css">CSS</option>
+                            <option value="php">PHP</option>
+                        </select>
+                    </span>
+                    <div class="editor-actions">
+                        <button id="format-code" class="editor-btn" title="Format Code">
+                            <i class="fas fa-align-left"></i>
+                        </button>
+                        <button id="clear-code" class="editor-btn" title="Clear Editor">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </div>
+                <textarea id="code-input" class="code-input" placeholder="Write your code here..."></textarea>
+                <div class="editor-footer">
+                    <div class="voice-controls">
+                        <button id="voice-input-btn" class="voice-btn" title="Voice Input">
+                            <i class="fas fa-microphone"></i>
+                        </button>
+                        <span id="voice-status">Click to speak</span>
+                    </div>
+                    <button id="submit-code" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> ASK AI
+                    </button>
+                    <div class="difficulty-selector">
+                        <span>Feedback Level:</span>
+                        <select id="difficulty-level">
+                            <option value="beginner">Beginner</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ai-response-container">
+                <div class="response-header">
+                    <h3><i class="fas fa-comment-dots"></i> AI Feedback</h3>
+                    <div class="response-actions">
+                        <button id="share-chat" class="share-chat-btn">
+                            <i class="fab fa-whatsapp"></i> Share
+                        </button>
+                        <button id="copy-response" class="editor-btn" title="Copy Feedback">
+                            <i class="far fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="response-content" class="response-content">
+                    <div class="empty-state">
+                        <i class="fas fa-lightbulb"></i>
+                        <p>Submit your code to receive AI-powered feedback, explanations, and improvements!</p>
+                    </div>
+                </div>
+                <div class="feedback-options">
+                    <button id="explain-code" class="btn btn-outline" disabled>
+                        <i class="fas fa-question-circle"></i> Explain This
+                    </button>
+                    <button id="optimize-code" class="btn btn-outline" disabled>
+                        <i class="fas fa-bolt"></i> Optimize
+                    </button>
+                    <button id="debug-code" class="btn btn-outline" disabled>
+                        <i class="fas fa-bug"></i> Debug
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Image Preview and OCR Processing -->
+        <div style="padding: 1rem 2rem; max-width: 1600px; margin: 0 auto;">
+            <img id="preview-image" class="preview-image" alt="Preview">
+            <div id="ocr-processing" class="ocr-processing">Processing image text...</div>
+        </div>
+
+        <div class="loading-overlay" id="loading-overlay">
+            <div class="loading-content">
+                <div class="loading-spinner"></div>
+                <p>Analyzing your code...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Exercises Page -->
+    <div id="exercises-page" class="page">
+        <div class="container exercises-container">
+            <div id="exercisesList">
+                <h1>Coding Exercises</h1>
+                <div class="exercises-grid" id="exercisesGrid">
+                    <!-- Exercises will be loaded here -->
+                </div>
+            </div>
+
+            <div id="exerciseDetail" style="display: none;">
+                <button id="backButton" class="btn-back">← Back to Exercises</button>
+                
+                <div class="exercise-detail-card">
+                    <h2 id="exerciseTitle"></h2>
+                    <div class="exercise-meta">
+                        <span id="exerciseDifficulty"></span>
+                        <span id="exerciseTopic"></span>
+                    </div>
+                    <p id="exerciseDescription"></p>
+                    
+                    <textarea id="solutionInput" placeholder="Write your solution here..."></textarea>
+                    
+                    <!--<button id="submitSolution" class="btn btn-primary">Subm</button>-->
+                </div>
+
+                <div id="feedbackContainer" class="feedback-container" style="display: none;">
+                    <h3>AI Feedback</h3>
+                    <pre id="feedbackContent"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resources Page -->
+    <div id="resources-page" class="page">
+        <div class="container resources-container">
+            <h1>Learning Resources</h1>
+
+            <div class="resources-controls">
+                <input type="text" id="searchInput" placeholder="Search resources...">
+                <div class="category-buttons">
+                    <button class="category-btn active" data-category="all">All</button>
+                    <button class="category-btn" data-category="documentation">Documentation</button>
+                    <button class="category-btn" data-category="tutorials">Tutorials</button>
+                    <button class="category-btn" data-category="books">Books</button>
+                    <button class="category-btn" data-category="tools">Tools</button>
+                    <button class="category-btn" data-category="languages">Languages</button>
+                </div>
+            </div>
+
+            <div class="resources-grid" id="resourcesGrid">
+                <!-- Resources will be loaded here -->
+            </div>
+
+            <div id="noResourcesMessage" class="no-resources">
+                No resources found matching your search criteria.
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script>
+        // Chat History Tracking
+        let chatHistory = [];
+        let recognition;
+        let isListening = false;
+        let synthesis = window.speechSynthesis;
+        // Replace with your actual Groq API key
+        const GROQ_API_KEY = 'your-groq-api-key-here'; 
+
+        // Navigation between pages
+        document.addEventListener('DOMContentLoaded', function() {
+            // Page navigation
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page');
+            const startLearningBtn = document.querySelector('.start-learning-btn');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.dataset.page;
+                    
+                    // Hide all pages
+                    pages.forEach(page => page.classList.remove('active'));
+                    
+                    // Show selected page
+                    document.getElementById(`${pageId}-page`).classList.add('active');
+                    
+                    // Initialize page if needed
+                    if (pageId === 'chat') initChatPage();
+                    else if (pageId === 'exercises') initExercisesPage();
+                    else if (pageId === 'resources') initResourcesPage();
+                });
+            });
+            
+            startLearningBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Hide all pages
+                pages.forEach(page => page.classList.remove('active'));
+                // Show chat page
+                document.getElementById('chat-page').classList.add('active');
+                initChatPage();
+            });
+            
+            // Initialize home page by default
+            initHomePage();
+        });
+        
+        // Home Page
+        function initHomePage() {
+            // No special initialization needed for home page
+        }
+        
+        // Chat Page
+        function initChatPage() {
+            // DOM elements
+            const codeInput = document.getElementById('code-input');
+            const submitBtn = document.getElementById('submit-code');
+            const responseContainer = document.getElementById('response-content');
+            const loadingOverlay = document.getElementById('loading-overlay');
+            const languageSelect = document.getElementById('language-select');
+            const difficultyLevel = document.getElementById('difficulty-level');
+            const formatBtn = document.getElementById('format-code');
+            const clearBtn = document.getElementById('clear-code');
+            const copyBtn = document.getElementById('copy-response');
+            const explainBtn = document.getElementById('explain-code');
+            const optimizeBtn = document.getElementById('optimize-code');
+            const debugBtn = document.getElementById('debug-code');
+            const fileUpload = document.getElementById('file-upload');
+            const imageUpload = document.getElementById('image-upload');
+            const previewImage = document.getElementById('preview-image');
+            const ocrProcessing = document.getElementById('ocr-processing');
+            const voiceInputBtn = document.getElementById('voice-input-btn');
+            const shareChatBtn = document.getElementById('share-chat');
+
+            // Initialize with sample code
+            codeInput.value = `# Sample Python code
+def calculate_average(numbers):
+    total = 0
+    count = 0
+    for num in numbers:
+        total += num
+        count += 1
+    average = total / count
+    return average`;
+
+            // Setup voice recognition
+            setupVoiceRecognition();
+
+            // Event listeners
+            submitBtn.addEventListener('click', submitCode);
+            formatBtn.addEventListener('click', formatCode);
+            clearBtn.addEventListener('click', clearCode);
+            copyBtn.addEventListener('click', copyResponse);
+            explainBtn.addEventListener('click', () => requestSpecificFeedback('explain'));
+            optimizeBtn.addEventListener('click', () => requestSpecificFeedback('optimize'));
+            debugBtn.addEventListener('click', () => requestSpecificFeedback('debug'));
+            fileUpload.addEventListener('change', handleFileUpload);
+            imageUpload.addEventListener('change', handleImageUpload);
+            voiceInputBtn.addEventListener('click', toggleVoiceInput);
+            shareChatBtn.addEventListener('click', shareChatToWhatsApp);
+            
+            // Voice Recognition Setup
+            function setupVoiceRecognition() {
+                recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+                recognition.continuous = false;
+                recognition.interimResults = false;
+                recognition.lang = 'en-US';
+
+                recognition.onstart = () => {
+                    isListening = true;
+                    document.getElementById('voice-status').textContent = "Listening...";
+                    document.getElementById('voice-input-btn').classList.add('active');
+                };
+
+                recognition.onresult = (event) => {
+                    const transcript = event.results[0][0].transcript;
+                    const cursorPos = codeInput.selectionStart;
+                    const textBefore = codeInput.value.substring(0, cursorPos);
+                    const textAfter = codeInput.value.substring(cursorPos);
+                    
+                    codeInput.value = textBefore + transcript + textAfter;
+                    
+                    // Move cursor to end of inserted text
+                    const newCursorPos = cursorPos + transcript.length;
+                    codeInput.setSelectionRange(newCursorPos, newCursorPos);
+                    
+                    showToast('Voice input added');
+                };
+
+                recognition.onerror = (event) => {
+                    console.error('Speech recognition error:', event.error);
+                    showToast('Voice input error', true);
+                };
+
+                recognition.onend = () => {
+                    isListening = false;
+                    document.getElementById('voice-status').textContent = "Click to speak";
+                    document.getElementById('voice-input-btn').classList.remove('active');
+                };
+            }
+
+            function toggleVoiceInput() {
+                if (!isListening) {
+                    recognition.start();
+                } else {
+                    recognition.stop();
+                }
+            }
+
+            // Text-to-Speech Functionality
+            function speakText(text) {
+                if (synthesis.speaking) {
+                    synthesis.cancel();
+                }
+
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = 1;
+                utterance.pitch = 1;
+                utterance.volume = 1;
+                
+                // Find a female voice if available
+                const voices = synthesis.getVoices();
+                const femaleVoice = voices.find(voice => 
+                    voice.name.includes('Female') || voice.lang === 'en-US'
+                );
+                
+                if (femaleVoice) {
+                    utterance.voice = femaleVoice;
+                }
+
+                synthesis.speak(utterance);
+            }
+
+            // WhatsApp Sharing Functionality
+            function shareChatToWhatsApp() {
+                if (chatHistory.length === 0) {
+                    showToast('No chat history to share', true);
+                    return;
+                }
+
+                const chatText = chatHistory.map(entry => {
+                    return `${entry.role === 'user' ? '👤 User Code' : '🤖 AI Feedback'}:\n${entry.content}`;
+                }).join('\n\n');
+
+                const encodedChat = encodeURIComponent(chatText);
+                const whatsappUrl = `https://wa.me/?text=${encodedChat}`;
+                
+                window.open(whatsappUrl, '_blank');
+            }
+
+            // File Upload Handling
+            function handleFileUpload(event) {
+                const file = event.target.files[0];
+                if (!file) return;
+                
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    document.getElementById('code-input').value = e.target.result;
+                    showToast(`File "${file.name}" loaded successfully!`);
+                    
+                    // Try to detect language from file extension
+                    detectLanguageFromFileName(file.name);
+                };
+                
+                reader.onerror = function() {
+                    showToast('Failed to read file', true);
+                };
+                
+                reader.readAsText(file);
+            }
+            
+            // Image Upload and OCR Handling
+            function handleImageUpload(event) {
+                const file = event.target.files[0];
+                if (!file) return;
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = 'block';
+                    ocrProcessing.style.display = 'block';
+                    
+                    // In a real app, you would send the image to an OCR API
+                    // For this demo, we'll simulate it with a timeout
+                    setTimeout(() => {
+                        // Simulate OCR results
+                        const simulatedText = `# Code extracted from image
+def hello_world():
+    print("Hello from the image!")
+    
+# Some more code
+x = 10
+y = 20
+print(x + y)`;
+                        
+                        document.getElementById('code-input').value = simulatedText;
+                        ocrProcessing.style.display = 'none';
+                        showToast('Successfully extracted text from image');
+                    }, 2000);
+                };
+                reader.readAsDataURL(file);
+            }
+            
+            function detectLanguageFromFileName(filename) {
+                const extension = filename.split('.').pop().toLowerCase();
+                const languageMap = {
+                    'py': 'python',
+                    'js': 'javascript',
+                    'java': 'java',
+                    'cpp': 'c++',
+                    'c': 'c',
+                    'html': 'html',
+                    'css': 'css',
+                    'php': 'php'
+                };
+                
+                if (languageMap[extension]) {
+                    languageSelect.value = languageMap[extension];
+                    showToast(`Detected ${languageMap[extension]} code`);
+                }
+            }
+
+
+
+           async function submitCode() {
+    const code = codeInput.value.trim();
+    const language = languageSelect.value;
+    const difficulty = difficultyLevel.value;
+
+    if (!code) {
+        showResponse('Please enter some code to analyze.', 'error');
+        return;
+    }
+
+    showLoading(true);
+    disableActionButtons();
+
+    chatHistory.push({
+        role: 'user',
+        content: code,
+        language: language,
+        timestamp: new Date().toISOString()
+    });
+
+    try {
+        const response = await fetch('/api/analyze', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                code: code,
+                language: language,
+                difficulty: difficulty
+            })
+        });
+
+        const data = await response.json();
+        
+        if (!response.ok) {
+            throw new Error(data.error || 'Failed to analyze code');
+        }
+
+        const feedback = data.feedback || 'No feedback available';
+        showResponse(feedback);
+
+        chatHistory.push({
+            role: 'ai',
+            content: feedback,
+            timestamp: new Date().toISOString()
+        });
+        
+        enableActionButtons();
+        
+    } catch (error) {
+        console.error('Analysis Error:', error);
+        showResponse(`Failed to analyze the code: ${error.message}`, 'error');
+    } finally {
+        showLoading(false);
+    }
+}
+
+async function requestSpecificFeedback(type) {
+    const code = codeInput.value.trim();
+    if (!code) {
+        showResponse('Please enter some code first.', 'error');
+        return;
+    }
+
+    showLoading(true);
+    disableActionButtons();
+
+    try {
+        const response = await fetch('/api/analyze-specific', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                code: code,
+                language: languageSelect.value,
+                requestType: type
+            })
+        });
+
+        const data = await response.json();
+        
+        if (!response.ok) {
+            throw new Error(data.error || 'Failed to process request');
+        }
+
+        const feedback = data.feedback || 'No feedback available';
+        showResponse(feedback);
+
+        chatHistory.push({
+            role: 'ai',
+            content: feedback,
+            timestamp: new Date().toISOString()
+        });
+    } catch (error) {
+        console.error('Specific Feedback Error:', error);
+        showResponse(`Failed to get ${type} feedback: ${error.message}`, 'error');
+    } finally {
+        showLoading(false);
+        enableActionButtons();
+    }
+}
+
+
+            function showResponse(message, type = 'success') {
+                responseContainer.innerHTML = '';
+                
+                const responseElement = document.createElement('div');
+                responseElement.className = `ai-response ${type === 'error' ? 'error' : ''}`;
+                
+                // Format code blocks in the response
+                const formattedMessage = formatAiResponse(message);
+                responseElement.innerHTML = formattedMessage;
+                
+                // Add speaker button
+                const speakerBtn = document.createElement('button');
+                speakerBtn.className = 'speaker-btn';
+                speakerBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                speakerBtn.onclick = () => speakText(message);
+                responseElement.prepend(speakerBtn);
+                
+                responseContainer.appendChild(responseElement);
+                
+                // Scroll to the response
+                responseContainer.scrollTop = responseContainer.scrollHeight;
+            }
+
+            // Helper functions
+            function formatAiResponse(message) {
+                if (typeof message !== 'string') return message;
+                
+                // Format code blocks (```language\ncode\n```)
+                let formatted = message.replace(/```(\w*)([\s\S]*?)```/g, 
+                    '<div class="code-block"><span class="code-language">$1</span><pre>$2</pre></div>');
+                
+                // Format inline code (`code`)
+                formatted = formatted.replace(/`([^`]+)`/g, '<code>$1</code>');
+                
+                // Preserve line breaks
+                formatted = formatted.replace(/\n/g, '<br>');
+                
+                return formatted;
+            }
+
+            function disableActionButtons() {
+                explainBtn.disabled = true;
+                optimizeBtn.disabled = true;
+                debugBtn.disabled = true;
+            }
+
+            function enableActionButtons() {
+                explainBtn.disabled = false;
+                optimizeBtn.disabled = false;
+                debugBtn.disabled = false;
+            }
+
+            function showLoading(show) {
+                loadingOverlay.style.display = show ? 'flex' : 'none';
+            }
+
+            function formatCode() {
+                // Simple indentation formatting
+                const code = codeInput.value;
+                const formatted = code.replace(/\n{3,}/g, '\n\n'); // Remove extra blank lines
+                codeInput.value = formatted;
+                showToast('Code formatted!');
+            }
+
+            function clearCode() {
+                if (confirm('Are you sure you want to clear the editor?')) {
+                    codeInput.value = '';
+                    showToast('Editor cleared');
+                }
+            }
+
+            function copyResponse() {
+                const responseText = responseContainer.textContent;
+                if (!responseText) return;
+
+                navigator.clipboard.writeText(responseText).then(() => {
+                    showToast('Feedback copied to clipboard!');
+                }).catch(err => {
+                    console.error('Failed to copy: ', err);
+                    showToast('Failed to copy feedback', true);
+                });
+            }
+            
+            function showToast(message, isError = false) {
+                const toast = document.getElementById('toast');
+                toast.textContent = message;
+                toast.style.backgroundColor = isError ? 'var(--red-600)' : 'var(--green-600)';
+                toast.classList.add('show');
+                
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            }
+        }
+        
+        // Exercises Page
+        function initExercisesPage() {
+            const exercisesGrid = document.getElementById('exercisesGrid');
+            const exercisesList = document.getElementById('exercisesList');
+            const exerciseDetail = document.getElementById('exerciseDetail');
+            const backButton = document.getElementById('backButton');
+            const submitSolution = document.getElementById('submitSolution');
+            const feedbackContainer = document.getElementById('feedbackContainer');
+            
+            const exercises = [
+                {
+                    id: 1,
+                    title: "FizzBuzz Implementation",
+                    difficulty: "easy",
+                    topic: "Loops",
+                    description: "Write a function that prints numbers from 1 to n, but prints 'Fizz' for multiples of 3, 'Buzz' for multiples of 5, and 'FizzBuzz' for multiples of both.",
+                    fullDescription: "Create a function that takes a number n as input and prints all numbers from 1 to n. However, for multiples of 3, print 'Fizz' instead of the number. For multiples of 5, print 'Buzz'. For numbers which are multiples of both 3 and 5, print 'FizzBuzz'."
+                },
+                {
+                    id: 2,
+                    title: "Palindrome Checker",
+                    difficulty: "easy",
+                    topic: "Strings",
+                    description: "Create a function that checks if a given string is a palindrome, considering only alphanumeric characters.",
+                    fullDescription: "Write a function that takes a string as input and returns true if it's a palindrome, false otherwise. Ignore spaces, punctuation, and letter casing. Example: 'A man, a plan, a canal: Panama' should return true."
+                },
+                {
+                    id: 3,
+                    title: "Binary Search",
+                    difficulty: "medium",
+                    topic: "Algorithms",
+                    description: "Implement a binary search algorithm to find an element in a sorted array.",
+                    fullDescription: "Implement a binary search function that takes a sorted array and a target value as input. The function should return the index of the target if found, or -1 if not found. The implementation should have O(log n) time complexity."
+                },
+                {
+                    id: 4,
+                    title: "Merge Sort",
+                    difficulty: "hard",
+                    topic: "Algorithms",
+                    description: "Implement the merge sort algorithm to sort an array of numbers.",
+                    fullDescription: "Create a function that implements the merge sort algorithm. The function should take an unsorted array as input and return a new sorted array. Include both the main mergeSort function and the merge helper function."
+                },
+                {
+                    id: 5,
+                    title: "Promise Chain",
+                    difficulty: "medium",
+                    topic: "Async",
+                    description: "Create a chain of promises that process data sequentially.",
+                    fullDescription: "Write a series of functions that use promises to process data in sequence. Create three functions that modify a value, and chain them together using promises. Handle both success and error cases."
+                },
+                {
+                    id: 6,
+                    title: "DOM Manipulator",
+                    difficulty: "easy",
+                    topic: "DOM",
+                    description: "Create functions to manipulate DOM elements dynamically.",
+                    fullDescription: "Write functions that can: 1) Create new elements 2) Modify element attributes 3) Add and remove classes 4) Handle events. Show examples of each operation."
+                }
+            ];
+            
+            // Clear exercises grid
+            exercisesGrid.innerHTML = '';
+             
+             // Render exercises
+             exercises.forEach(exercise => {
+                const exerciseCard = document.createElement('div');
+                exerciseCard.className = 'exercise-card';
+                exerciseCard.innerHTML = `
+                    <div class="exercise-header">
+                        <h3 class="exercise-title">${exercise.title}</h3>
+                        <span class="exercise-difficulty ${exercise.difficulty}">${exercise.difficulty.charAt(0).toUpperCase() + exercise.difficulty.slice(1)}</span>
+                    </div>
+                    <span class="exercise-topic">${exercise.topic}</span>
+                    <p class="exercise-description">${exercise.description}</p>
+                `;
+                exerciseCard.addEventListener('click', () => showExerciseDetail(exercise));
+                exercisesGrid.appendChild(exerciseCard);
+            });
+            
+            // Show exercise detail
+            function showExerciseDetail(exercise) {
+                exercisesList.style.display = 'none';
+                exerciseDetail.style.display = 'block';
+                
+                document.getElementById('exerciseTitle').textContent = exercise.title;
+                document.getElementById('exerciseDifficulty').textContent = exercise.difficulty.charAt(0).toUpperCase() + exercise.difficulty.slice(1);
+                document.getElementById('exerciseDifficulty').className = `exercise-difficulty ${exercise.difficulty}`;
+                document.getElementById('exerciseTopic').textContent = exercise.topic;
+                document.getElementById('exerciseDescription').textContent = exercise.fullDescription;
+                document.getElementById('solutionInput').value = '';
+                document.getElementById('feedbackContent').textContent = '';
+                document.getElementById('feedbackContainer').style.display = 'none';
+            }
+            
+            // Back button
+            backButton.addEventListener('click', function() {
+                exercisesList.style.display = 'block';
+                exerciseDetail.style.display = 'none';
+            });
+            
+            // Submit solution
+            submitSolution.addEventListener('click', function() {
+                const solution = document.getElementById('solutionInput').value.trim();
+                if (!solution) {
+                    alert('Please write your solution before submitting.');
+                    return;
+                }
+                
+                const exerciseTitle = document.getElementById('exerciseTitle').textContent;
+                const feedbackContent = document.getElementById('feedbackContent');
+                
+                // Simulate AI feedback
+                feedbackContent.textContent = "Analyzing your solution...";
+                document.getElementById('feedbackContainer').style.display = 'block';
+                
+                setTimeout(() => {
+                    feedbackContent.textContent = getFeedback(exerciseTitle, solution);
+                }, 2000);
+            });
+            
+            function getFeedback(title, solution) {
+                return `Thank you for submitting your solution for "${title}". Here's my feedback:
+
+1. Correctness: Your solution appears to be logically correct.
+2. Efficiency: The time complexity seems optimal for this problem.
+3. Readability: Consider adding more comments to explain complex parts.
+4. Edge Cases: Have you considered testing with empty input?
+
+Overall, good job! Keep practicing.`;
+            }
+        }
+        
+        // Resources Page
+        function initResourcesPage() {
+            const resourcesGrid = document.getElementById('resourcesGrid');
+            const searchInput = document.getElementById('searchInput');
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            const noResourcesMessage = document.getElementById('noResourcesMessage');
+            
+            const resources = [
+                {
+                    title: "MDN Web Docs",
+                    description: "Comprehensive documentation for web technologies",
+                    link: "https://developer.mozilla.org",
+                    category: "documentation"
+                },
+                {
+                    title: "React Documentation",
+                    description: "Official React documentation and tutorials",
+                    link: "https://react.dev",
+                    category: "documentation"
+                },
+                {
+                    title: "JavaScript Info",
+                    description: "Modern JavaScript tutorial and reference",
+                    link: "https://javascript.info",
+                    category: "documentation"
+                },
+                {
+                    title: "freeCodeCamp",
+                    description: "Free coding tutorials and certification courses",
+                    link: "https://www.freecodecamp.org",
+                    category: "tutorials"
+                },
+                {
+                    title: "Codecademy",
+                    description: "Interactive coding lessons and projects",
+                    link: "https://www.codecademy.com",
+                    category: "tutorials"
+                },
+                {
+                    title: "The Odin Project",
+                    description: "Full-stack curriculum for web development",
+                    link: "https://www.theodinproject.com",
+                    category: "tutorials"
+                },
+                {
+                    title: "Eloquent JavaScript",
+                    description: "A modern introduction to programming",
+                    link: "https://eloquentjavascript.net",
+                    category: "books"
+                },
+                {
+                    title: "You Don't Know JS",
+                    description: "Deep dive into JavaScript fundamentals",
+                    link: "https://github.com/getify/You-Dont-Know-JS",
+                    category: "books"
+                },
+                {
+                    title: "Clean Code",
+                    description: "A handbook of agile software craftsmanship",
+                    link: "https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882",
+                    category: "books"
+                },
+                {
+                    title: "GitHub",
+                    description: "Version control and collaboration platform",
+                    link: "https://github.com",
+                    category: "tools"
+                },
+                {
+                    title: "VS Code",
+                    description: "Popular code editor with extensive features",
+                    link: "https://code.visualstudio.com",
+                    category: "tools"
+                },
+                {
+                    title: "CodePen",
+                    description: "Online code editor for web development",
+                    link: "https://codepen.io",
+                    category: "tools"
+                },
+                
+                {
+    title: "Learn C ",
+    description: "Beginner-friendly C programming tutorials.",
+    link: "https://www.geeksforgeeks.org/c-programming-language/",
+     category: "languages"
+},
+{
+    title: "C Programming Tutorial ",
+    description: "freeCodeCamp's full course on C programming.",
+    link: "https://www.youtube.com/watch?v=KJgsSFOSQv0",
+    category: "languages"
+},
+{
+    title: "Learn C++ ",
+    description: "Detailed guide on C++ programming.",
+    link: "https://www.geeksforgeeks.org/c-plus-plus/",
+     category: "languages"
+},
+{
+    title: "C++ Full Course Tutorial",
+    description: "Full C++ course for beginners.",
+    link: "https://www.youtube.com/watch?v=vLnPwxZdW4Y",
+     category: "languages"
+},
+{
+    title: "Learn Java ",
+    description: "Java programming explained step-by-step.",
+    link: "https://www.geeksforgeeks.org/java/",
+     category: "languages"
+},
+{
+    title: "Java Programming Tutorial",
+    description: "Java tutorial for beginners from Telusko.",
+    link: "https://www.youtube.com/watch?v=ntLJmHOJ0ME",
+     category: "languages"
+},
+{
+    title: "Learn Python ",
+    description: "Beginner to advanced Python tutorials.",
+    link: "https://www.geeksforgeeks.org/python-programming-language/",
+    category: "languages"
+},
+{
+    title: "Python Course Tutorial",
+    description: "Python full course by Programming with Mosh.",
+    link: "https://www.youtube.com/watch?v=_uQrJ0TkZlc",
+     category: "languages"
+},
+{
+    title: "JavaScript Full Course Tutorial",
+    description: "Complete JavaScript tutorial from freeCodeCamp.",
+    link: "https://www.youtube.com/watch?v=jS4aFq5-91M",
+     category: "languages"
+},
+{
+    title: "Learn HTML ",
+    description: "Comprehensive HTML documentation by Mozilla.",
+    link: "https://developer.mozilla.org/en-US/docs/Web/HTML",
+     category: "languages"
+},
+{
+    title: "Learn CSS ",
+    description: "Comprehensive CSS documentation by Mozilla.",
+    link: "https://developer.mozilla.org/en-US/docs/Web/CSS",
+     category: "languages"
+},
+{
+    title: "HTML & CSS Crash Course Tutorial",
+    description: "Crash course on HTML and CSS by Traversy Media.",
+    link: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+     category: "languages"
+},
+{
+    title: "Learn PHP ",
+    description: "Tutorial series for PHP development.",
+    link: "https://www.geeksforgeeks.org/php-tutorial/",
+     category: "languages"
+},
+{
+    title: "PHP for Beginners Tutorial",
+    description: "Complete beginner tutorial for PHP by CodeCourse.",
+    link: "https://www.youtube.com/watch?v=OK_JCtrrv-c",
+     category: "languages"
+}
+            ];
+            
+            let currentCategory = 'all';
+            let currentSearchTerm = '';
+            
+            // Initial render
+            renderResources();
+            
+            // Search functionality
+            searchInput.addEventListener('input', function() {
+                currentSearchTerm = this.value.toLowerCase();
+                renderResources();
+            });
+            
+            // Category filter
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    currentCategory = this.dataset.category;
+                    renderResources();
+                });
+            });
+            
+            // Render resources based on filters
+            function renderResources() {
+                const filtered = resources.filter(resource => {
+                    const matchesCategory = currentCategory === 'all' || resource.category === currentCategory;
+                    const matchesSearch = currentSearchTerm === '' || 
+                        resource.title.toLowerCase().includes(currentSearchTerm) || 
+                        resource.description.toLowerCase().includes(currentSearchTerm);
+                    return matchesCategory && matchesSearch;
+                });
+                
+                resourcesGrid.innerHTML = '';
+                
+                if (filtered.length === 0) {
+                    noResourcesMessage.style.display = 'block';
+                } else {
+                    noResourcesMessage.style.display = 'none';
+                    filtered.forEach(resource => {
+                        const resourceCard = document.createElement('div');
+                        resourceCard.className = 'resource-card';
+                        resourceCard.innerHTML = `
+                            <h3>${resource.title}</h3>
+                            <p>${resource.description}</p>
+                            <a href="${resource.link}" target="_blank" class="resource-link">
+                                Visit Resource <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        `;
+                        resourcesGrid.appendChild(resourceCard);
+                    });
+                }
+            }
+        }
+
+        // Initialize speech synthesis voices
+        window.speechSynthesis.onvoiceschanged = () => {
+            // Voices loaded
+        };
+    </script>
+</body>
+</html>
