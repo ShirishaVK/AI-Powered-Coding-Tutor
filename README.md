@@ -65,3 +65,7 @@ Users can **type, upload files, or use voice input** for their coding queries, m
 git clone https://github.com/yourusername/your-repo-name.git
 cd your-repo-name
 npm install
+
+## 🌐 Hosted & Live App Link
+
+Click here to visit:-https://ai-powered-coding-tutor.vercel.app/
